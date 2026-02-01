@@ -14,6 +14,7 @@
       font-family: Arial, sans-serif;
       overflow: hidden;
       text-align: center;
+      position: relative;
     }
 
     .box {
@@ -21,8 +22,8 @@
       padding: 40px;
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      position: relative;
       max-width: 90%;
+      z-index: 2;
     }
 
     h1 {
@@ -38,22 +39,26 @@
     button {
       font-size: 18px;
       padding: 12px 24px;
-      margin: 15px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       position: absolute;
-      transition: top 0.2s, left 0.2s;
+      transition: top 0.25s, left 0.25s;
     }
 
     #yesBtn {
       background-color: #ff4d6d;
       color: white;
       position: relative;
+      margin-top: 20px;
+      z-index: 3;
     }
 
     #noBtn {
       background-color: #cccccc;
+      top: 60%;
+      left: 55%;
+      z-index: 3;
     }
 
     #message {
@@ -65,16 +70,17 @@
   </style>
 </head>
 <body>
+
   <div class="box">
     <h1>Kajal 💕</h1>
-    <h2>From Nitish, with love…</h2>
+    <h2>Nitish has a question for you…</h2>
     <h1>Will you be my Valentine? 💘</h1>
 
     <button id="yesBtn">Yes 💖</button>
-    <button id="noBtn">No 🙈</button>
-
     <div id="message">YAY Kajal!!! 💞 Nitish is the luckiest guy ever 😍</div>
   </div>
+
+  <button id="noBtn">No 🙈</button>
 
   <script>
     const noBtn = document.getElementById("noBtn");
@@ -82,7 +88,7 @@
     const message = document.getElementById("message");
 
     function moveNoButton() {
-      const padding = 20;
+      const padding = 10;
       const maxX = window.innerWidth - noBtn.offsetWidth - padding;
       const maxY = window.innerHeight - noBtn.offsetHeight - padding;
 
@@ -93,12 +99,11 @@
       noBtn.style.top = y + "px";
     }
 
-    // Move when mouse tries to click
-    noBtn.addEventListener("mousedown", moveNoButton);
-    noBtn.addEventListener("touchstart", moveNoButton);
-
-    // Also move if cursor gets too close (extra evil 😈)
+    // Keep escaping on hover
     noBtn.addEventListener("mouseover", moveNoButton);
+
+    // Mobile touch support
+    noBtn.addEventListener("touchstart", moveNoButton);
 
     yesBtn.addEventListener("click", () => {
       message.style.display = "block";
@@ -106,5 +111,6 @@
       noBtn.style.display = "none";
     });
   </script>
+
 </body>
 </html>
